@@ -46,7 +46,7 @@ const ChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Dynamic textarea resizing
+  // Dynamic textarea resizing with border radius adjustment
   const adjustTextareaHeight = () => {
     const textarea = inputRef.current;
     if (!textarea) return;
@@ -59,15 +59,27 @@ const ChatWidget: React.FC = () => {
     const minHeight = 48; // Base height for single line
     const maxHeight = 120; // Maximum height before scrolling
     
+    let finalHeight;
     if (scrollHeight <= maxHeight) {
       // If content fits within max height, resize to fit content
-      textarea.style.height = `${Math.max(scrollHeight, minHeight)}px`;
+      finalHeight = Math.max(scrollHeight, minHeight);
+      textarea.style.height = `${finalHeight}px`;
       textarea.style.overflowY = 'hidden';
     } else {
       // If content exceeds max height, set to max and enable scrolling
+      finalHeight = maxHeight;
       textarea.style.height = `${maxHeight}px`;
       textarea.style.overflowY = 'auto';
     }
+
+    // Dynamic border radius based on height
+    // Start with 22px radius at minHeight, decrease to 12px at maxHeight
+    const radiusRange = 22 - 12; // 10px range
+    const heightRange = maxHeight - minHeight; // 72px range
+    const heightProgress = Math.min((finalHeight - minHeight) / heightRange, 1); // 0 to 1
+    const currentRadius = 22 - (radiusRange * heightProgress);
+    
+    textarea.style.borderRadius = `${currentRadius}px`;
   };
 
   // Handle input change with dynamic resizing
@@ -79,13 +91,14 @@ const ChatWidget: React.FC = () => {
     }, 0);
   };
 
-  // Reset textarea height when input is cleared
+  // Reset textarea height and border radius when input is cleared
   useEffect(() => {
     if (inputValue === '') {
       const textarea = inputRef.current;
       if (textarea) {
         textarea.style.height = '48px';
         textarea.style.overflowY = 'hidden';
+        textarea.style.borderRadius = '22px'; // Reset to full rounding
       }
     }
   }, [inputValue]);
@@ -147,11 +160,12 @@ const ChatWidget: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
-    // Reset textarea height
+    // Reset textarea height and border radius
     const textarea = inputRef.current;
     if (textarea) {
       textarea.style.height = '48px';
       textarea.style.overflowY = 'hidden';
+      textarea.style.borderRadius = '22px'; // Reset to full rounding
     }
 
     try {
@@ -302,12 +316,13 @@ const ChatWidget: React.FC = () => {
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
               placeholder="Type your message..."
-              className="flex-1 bg-slate-700 border border-slate-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 text-white rounded-full px-4 py-3 text-sm resize-none transition-all duration-200 ease-in-out"
+              className="flex-1 bg-slate-700 border border-slate-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 text-white px-4 py-3 text-sm resize-none transition-all duration-200 ease-in-out"
               rows={1}
               style={{
                 minHeight: '48px',
                 maxHeight: '120px',
-                lineHeight: '1.4'
+                lineHeight: '1.4',
+                borderRadius: '22px' // Initial rounding, will be dynamically adjusted
               }}
             />
             <button
