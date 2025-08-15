@@ -13,9 +13,24 @@ const ChatWidget: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [currentLoadingMessage, setCurrentLoadingMessage] = useState('');
 
   const webhookUrl = 'https://thayneautomations.app.n8n.cloud/webhook/ai-agent-path-Ava-User-prompt';
   const MAX_CONTEXT_MESSAGES = 10;
+
+  // IronForge themed loading messages
+  const loadingMessages = [
+    "Heating up the forge...",
+    "Forging the perfect response...",
+    "Automating response protocols...",
+    "Striking while the iron's hot...",
+    "Hammering out solutions...",
+    "Streamlining data pathways...",
+    "Tempering your automation strategy...",
+    "Calibrating efficiency algorithms...",
+    "Cooling down the red-hot data...",
+    "Training neural networks..."
+  ];
 
   const suggestions = [
     "What types of automation solutions do you offer?",
@@ -30,6 +45,50 @@ const ChatWidget: React.FC = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Dynamic textarea resizing
+  const adjustTextareaHeight = () => {
+    const textarea = inputRef.current;
+    if (!textarea) return;
+
+    // Reset height to auto to get the correct scrollHeight
+    textarea.style.height = 'auto';
+    
+    // Calculate the new height
+    const scrollHeight = textarea.scrollHeight;
+    const minHeight = 48; // Base height for single line
+    const maxHeight = 120; // Maximum height before scrolling
+    
+    if (scrollHeight <= maxHeight) {
+      // If content fits within max height, resize to fit content
+      textarea.style.height = `${Math.max(scrollHeight, minHeight)}px`;
+      textarea.style.overflowY = 'hidden';
+    } else {
+      // If content exceeds max height, set to max and enable scrolling
+      textarea.style.height = `${maxHeight}px`;
+      textarea.style.overflowY = 'auto';
+    }
+  };
+
+  // Handle input change with dynamic resizing
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(e.target.value);
+    // Use setTimeout to ensure the DOM is updated before calculating height
+    setTimeout(() => {
+      adjustTextareaHeight();
+    }, 0);
+  };
+
+  // Reset textarea height when input is cleared
+  useEffect(() => {
+    if (inputValue === '') {
+      const textarea = inputRef.current;
+      if (textarea) {
+        textarea.style.height = '48px';
+        textarea.style.overflowY = 'hidden';
+      }
+    }
+  }, [inputValue]);
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -48,12 +107,37 @@ const ChatWidget: React.FC = () => {
   const handleSuggestionClick = (suggestion: string) => {
     setInputValue(suggestion);
     inputRef.current?.focus();
+    // Adjust height after setting the suggestion
+    setTimeout(() => {
+      adjustTextareaHeight();
+    }, 0);
   };
 
   const getConversationHistory = (): Message[] => {
     const startIndex = Math.max(0, messages.length - MAX_CONTEXT_MESSAGES);
     return messages.slice(startIndex);
   };
+
+  // Loading message rotation effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    
+    if (isLoading) {
+      let messageIndex = 0;
+      setCurrentLoadingMessage(loadingMessages[messageIndex]);
+      
+      interval = setInterval(() => {
+        messageIndex = (messageIndex + 1) % loadingMessages.length;
+        setCurrentLoadingMessage(loadingMessages[messageIndex]);
+      }, 2500); // Change message every 2.5 seconds
+    }
+    
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [isLoading, loadingMessages]);
 
   const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
@@ -62,6 +146,13 @@ const ChatWidget: React.FC = () => {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
+
+    // Reset textarea height
+    const textarea = inputRef.current;
+    if (textarea) {
+      textarea.style.height = '48px';
+      textarea.style.overflowY = 'hidden';
+    }
 
     try {
       const conversationHistory = getConversationHistory();
@@ -83,16 +174,13 @@ const ChatWidget: React.FC = () => {
       });
 
       const data = await response.json();
-      console.log('Response data:', data); // For debugging
+      console.log('Response data:', data);
       
       let botResponse = '';
       
-      // Handle the array format that n8n is sending
       if (Array.isArray(data) && data.length > 0 && data[0].text) {
         botResponse = data[0].text;
-      }
-      // Fallback to the original format checks
-      else if (data?.aiResponse) {
+      } else if (data?.aiResponse) {
         botResponse = data.aiResponse;
       } else if (data?.response) {
         botResponse = data.response;
@@ -178,8 +266,9 @@ const ChatWidget: React.FC = () => {
             
             {isLoading && (
               <div className="bg-slate-900 text-white border border-orange-500 p-3 rounded-lg rounded-tl-sm max-w-[85%]">
-                <div className="flex items-center justify-center py-2">
-                  <div className="flex space-x-1">
+                <div className="flex items-center justify-between py-2">
+                  <span className="text-sm text-orange-300">{currentLoadingMessage}</span>
+                  <div className="flex space-x-1 ml-3">
                     <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
                     <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
                     <div className="w-2 h-2 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
@@ -210,14 +299,15 @@ const ChatWidget: React.FC = () => {
             <textarea
               ref={inputRef}
               value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
+              onChange={handleInputChange}
               onKeyPress={handleKeyPress}
               placeholder="Type your message..."
-              className="flex-1 bg-slate-700 border border-slate-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 text-white rounded-full px-4 py-3 text-sm resize-none max-h-24 transition-colors"
+              className="flex-1 bg-slate-700 border border-slate-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 text-white rounded-full px-4 py-3 text-sm resize-none transition-all duration-200 ease-in-out"
               rows={1}
               style={{
                 minHeight: '48px',
-                maxHeight: '120px'
+                maxHeight: '120px',
+                lineHeight: '1.4'
               }}
             />
             <button
