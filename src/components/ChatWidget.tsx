@@ -136,13 +136,17 @@ const ChatWidget: React.FC = () => {
     let interval: NodeJS.Timeout;
     
     if (isLoading) {
-      let messageIndex = 0;
+      // Start with a random message to add variety
+      let messageIndex = Math.floor(Math.random() * loadingMessages.length);
       setCurrentLoadingMessage(loadingMessages[messageIndex]);
       
       interval = setInterval(() => {
         messageIndex = (messageIndex + 1) % loadingMessages.length;
         setCurrentLoadingMessage(loadingMessages[messageIndex]);
       }, 2500); // Change message every 2.5 seconds
+    } else {
+      // Clear the loading message when not loading
+      setCurrentLoadingMessage('');
     }
     
     return () => {
@@ -150,7 +154,7 @@ const ChatWidget: React.FC = () => {
         clearInterval(interval);
       }
     };
-  }, [isLoading, loadingMessages]);
+  }, [isLoading]);
 
   const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
@@ -213,7 +217,9 @@ const ChatWidget: React.FC = () => {
         content: "Sorry, I'm having trouble connecting. Please try again later." 
       }]);
     } finally {
+      // Ensure loading state is always cleared
       setIsLoading(false);
+      setCurrentLoadingMessage('');
     }
   };
 
