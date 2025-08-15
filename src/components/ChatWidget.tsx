@@ -83,15 +83,23 @@ const ChatWidget: React.FC = () => {
       });
 
       const data = await response.json();
+      console.log('Response data:', data); // For debugging
       
       let botResponse = '';
-      if (data?.aiResponse) {
+      
+      // Handle the array format that n8n is sending
+      if (Array.isArray(data) && data.length > 0 && data[0].text) {
+        botResponse = data[0].text;
+      }
+      // Fallback to the original format checks
+      else if (data?.aiResponse) {
         botResponse = data.aiResponse;
       } else if (data?.response) {
         botResponse = data.response;
       } else if (data?.text) {
         botResponse = data.text;
       } else {
+        console.error('Unexpected response format:', data);
         botResponse = "I've received your message but I'm having trouble processing it. Please try again.";
       }
 
