@@ -1,5 +1,6 @@
 // src/components/CaseStudies.tsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, TrendingUp } from 'react-feather';
 import type { CaseStudy } from '../types';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
@@ -93,13 +94,13 @@ const CaseStudies: React.FC = () => {
         </div>
         
         <div className="text-center">
-          <a
-            href="/case-studies"
+          <Link
+            to="/case-studies"
             className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/30"
           >
             View All Case Studies
             <ArrowRight size={20} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
