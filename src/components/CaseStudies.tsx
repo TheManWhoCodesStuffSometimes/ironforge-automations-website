@@ -33,7 +33,7 @@ const featuredCaseStudies: CaseStudy[] = [
     title: 'Automated Sales Tracking System',
     company: 'The Cowboy Saloon',
     description: 'Built an automated financial performance monitoring and reporting system that eliminated manual spreadsheet work and provided real-time insights.',
-    annualSavings: '$12,000+',
+    annualSavings: '$750+',
     category: 'automation',
     highlights: ['Automated daily reports', 'Real-time analytics', 'Accountant-ready exports'],
     demoAvailable: true
