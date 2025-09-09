@@ -13,7 +13,7 @@ const featuredCaseStudies: CaseStudy[] = [
     title: 'Weapon Service Form Digitization',
     company: 'Gold Spur Outfitters',
     description: 'Transformed handwritten weapon service forms into a digital system with AI-powered handwriting recognition and automated Excel data entry.',
-    annualSavings: '$15,000+',
+    annualSavings: '$1,500+',
     category: 'digitization',
     highlights: ['5 different form types digitized', 'Automated data extraction', 'Searchable digital records'],
     demoAvailable: true
@@ -23,7 +23,7 @@ const featuredCaseStudies: CaseStudy[] = [
     title: 'Food Shipment Inventory System',
     company: 'Laramie Soup Kitchen',
     description: 'Replaced manual paper-based inventory tracking with a rapid digital recording system optimized for high-volume, time-sensitive operations.',
-    annualSavings: '$8,000+',
+    annualSavings: '$2,800+',
     category: 'digitization',
     highlights: ['Real-time inventory tracking', 'Reduced data entry time by 75%', 'Improved accuracy'],
     demoAvailable: true
