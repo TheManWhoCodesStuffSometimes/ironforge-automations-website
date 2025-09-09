@@ -50,7 +50,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Automated Sales Tracking System',
     company: 'The Cowboy Saloon',
     description: 'Built an automated financial performance monitoring and reporting system that eliminates manual spreadsheet work. The system automatically compiles daily sales data and generates accountant-ready reports.',
-    annualSavings: '$12,000+',
+    annualSavings: '$750+',
     category: 'automation',
     highlights: [
       'Automated daily sales reports',
@@ -66,7 +66,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Song Queue Management System',
     company: 'The Cowboy Saloon',
     description: 'Created an intelligent music request system that allows customers to request songs while preventing repetitive playlists. The system manages queue fairness and provides analytics on popular music choices.',
-    annualSavings: '$6,000+',
+    annualSavings: '$2,000+',
     category: 'automation',
     highlights: [
       'Customer self-service requests',
@@ -132,7 +132,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Client Project Management System',
     company: 'IronForge Automations',
     description: 'Developed an internal system that tracks project progress, automates client updates, manages deadlines, and provides real-time visibility into all active engagements.',
-    annualSavings: '$20,000+',
+    annualSavings: '$2,500+',
     category: 'automation',
     highlights: [
       'Real-time project dashboards',
@@ -140,6 +140,22 @@ const allCaseStudies: CaseStudy[] = [
       'Deadline management',
       'Resource allocation optimization',
       'Profitability tracking'
+    ],
+    demoAvailable: true
+  },
+  {
+    id: 'ironforge-ai-chatbot',
+    title: 'AI Customer Support Chatbot',
+    company: 'IronForge Automations',
+    description: 'Intelligent chatbot deployed on our website that handles repetitive customer inquiries, provides instant responses about services, and qualifies leads 24/7. Reduces time spent on answering common questions and improves customer engagement.',
+    annualSavings: '$650+',
+    category: 'ai',
+    highlights: [
+      '24/7 automated customer support',
+      'Instant responses to common questions',
+      'Lead qualification and routing',
+      'Integration with company knowledge base',
+      'Reduces repetitive support tasks by 80%'
     ],
     demoAvailable: true
   }
@@ -361,13 +377,23 @@ const CaseStudiesPage: React.FC = () => {
           <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-8">
             Join these success stories. Let's discuss how automation can drive efficiency and savings for your organization.
           </p>
-          <Link
-            to="/#contact"
+          
+            href="#contact"
+            onClick={(e) => {
+              e.preventDefault();
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                // If we're on the case studies page and contact doesn't exist, go to home page contact
+                window.location.href = '/#contact';
+              }
+            }}
             className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/30"
           >
             Start Your Automation Journey
             <Zap size={20} />
-          </Link>
+          </a>
         </div>
       </section>
 
