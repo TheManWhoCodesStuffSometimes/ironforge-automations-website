@@ -1,6 +1,7 @@
 // src/pages/CaseStudiesPage.tsx
-import React, { useState } from 'react';
-import { ArrowLeft, TrendingUp, Clock, Users, Zap, Database, Mail, Calendar, BarChart } from 'react-feather';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, TrendingUp, Clock, Users, Zap, Database, BarChart } from 'react-feather';
 import type { CaseStudy } from '../types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -171,6 +172,11 @@ const CaseStudiesPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedCompany, setSelectedCompany] = useState('all');
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const companies = ['all', ...Array.from(new Set(allCaseStudies.map(cs => cs.company)))];
   
   const filteredCaseStudies = allCaseStudies.filter(study => {
@@ -191,13 +197,13 @@ const CaseStudiesPage: React.FC = () => {
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-b from-slate-800 to-slate-900">
         <div className="container mx-auto px-6">
-          <a 
-            href="/"
+          <Link 
+            to="/"
             className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 mb-6 transition-colors"
           >
             <ArrowLeft size={20} />
             Back to Home
-          </a>
+          </Link>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mb-6">
             Our <span className="text-orange-400">Case Studies</span>
@@ -371,13 +377,13 @@ const CaseStudiesPage: React.FC = () => {
           <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-8">
             Join these success stories. Let's discuss how automation can drive efficiency and savings for your organization.
           </p>
-          <a
-            href="/#contact"
+          <Link
+            to="/#contact"
             className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-orange-500/30"
           >
             Start Your Automation Journey
             <Zap size={20} />
-          </a>
+          </Link>
         </div>
       </section>
 
