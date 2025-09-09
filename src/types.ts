@@ -30,3 +30,14 @@ export interface Testimonial {
   author: string;
   company: string;
 }
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  company: string;
+  description: string;
+  annualSavings: string;
+  category: 'automation' | 'digitization' | 'ai' | 'integration';
+  highlights?: string[];
+  demoAvailable: boolean;
+}
