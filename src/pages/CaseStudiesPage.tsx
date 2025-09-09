@@ -378,6 +378,7 @@ const CaseStudiesPage: React.FC = () => {
             Join these success stories. Let's discuss how automation can drive efficiency and savings for your organization.
           </p>
           
+          <a
             href="#contact"
             onClick={(e) => {
               e.preventDefault();
