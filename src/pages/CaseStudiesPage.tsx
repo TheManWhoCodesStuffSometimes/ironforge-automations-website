@@ -14,7 +14,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Weapon Service Form Digitization',
     company: 'Gold Spur Outfitters',
     description: 'Transformed handwritten weapon service forms into a digital system with AI-powered handwriting recognition and automated Excel data entry. This solution eliminates hours of manual data entry while creating searchable digital records for better customer service.',
-    annualSavings: '$15,000+',
+    annualSavings: '$1,500+',
     category: 'digitization',
     highlights: [
       '5 different form types digitized',
@@ -25,22 +25,6 @@ const allCaseStudies: CaseStudy[] = [
     ],
     demoAvailable: true
   },
-  {
-    id: 'gold-spur-task-management',
-    title: 'Employee Task Management System',
-    company: 'Gold Spur Outfitters',
-    description: 'Replaced physical whiteboard task tracking with a digital system that provides real-time task assignment, progress tracking, and completion notifications. Employees can access tasks from any device, improving accountability and efficiency.',
-    annualSavings: '$8,000+',
-    category: 'automation',
-    highlights: [
-      'Real-time task updates',
-      'Mobile-friendly interface',
-      'Automated task reminders',
-      'Performance analytics',
-      'Priority-based task sorting'
-    ],
-    demoAvailable: true
-  },
 
   // Laramie Soup Kitchen
   {
@@ -48,7 +32,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Food Shipment Inventory System',
     company: 'Laramie Soup Kitchen',
     description: 'Developed a rapid digital inventory recording system optimized for high-volume, time-sensitive food shipment processing. The system dramatically reduces the time needed to log incoming donations while improving accuracy and reporting capabilities.',
-    annualSavings: '$8,000+',
+    annualSavings: '$2,800+',
     category: 'digitization',
     highlights: [
       '75% reduction in inventory logging time',
@@ -94,18 +78,18 @@ const allCaseStudies: CaseStudy[] = [
     demoAvailable: true
   },
   {
-    id: 'cowboy-lighting-system',
-    title: 'Automated Lighting Control System',
+    id: 'cowboy-band-management',
+    title: 'Band Management & Recruitment System',
     company: 'The Cowboy Saloon',
-    description: 'Developed a custom lighting system that automatically varies light shows throughout the night, eliminating repetitive patterns and creating a more dynamic atmosphere without manual intervention.',
-    annualSavings: '$5,000+',
+    description: 'Automated band recruitment and evaluation system that searches through emails, finds bands, researches them on the internet, finds relevant information, and ranks them. Eliminates manual review of numerous band inquiry emails and provides easy access to highest tier talent.',
+    annualSavings: '$2,800+',
     category: 'automation',
     highlights: [
-      'Dynamic lighting patterns',
-      'Time-based automation',
-      'Energy efficiency optimization',
-      'Special event presets',
-      'Remote control capability'
+      'Automated email parsing and band identification',
+      'Web research on band social media and reviews',
+      'Intelligent ranking algorithm based on location, genre, experience',
+      'Dashboard presentation for easy decision-making',
+      '75% reduction in band evaluation time'
     ],
     demoAvailable: true
   },
@@ -116,7 +100,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Automated Email Sales Agent',
     company: 'IronForge Automations',
     description: 'Built an AI-powered email automation system that qualifies leads, sends personalized follow-ups, and nurtures prospects through the sales funnel without manual intervention.',
-    annualSavings: '$25,000+',
+    annualSavings: '$800+',
     category: 'ai',
     highlights: [
       'AI-powered email personalization',
@@ -132,7 +116,7 @@ const allCaseStudies: CaseStudy[] = [
     title: 'Intelligent Financial Calendar',
     company: 'IronForge Automations',
     description: 'Created an automated financial tracking and forecasting system that monitors cash flow, predicts future financial positions, and alerts to potential issues before they become critical.',
-    annualSavings: '$18,000+',
+    annualSavings: '$3,120+',
     category: 'automation',
     highlights: [
       'Automated invoice tracking',
@@ -251,8 +235,8 @@ const CaseStudiesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="py-8 bg-slate-800 sticky top-16 z-40 shadow-lg">
+      {/* Filters - No longer sticky */}
+      <section className="py-8 bg-slate-800 shadow-lg">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-6">
             {/* Category Filter */}
@@ -351,8 +335,8 @@ const CaseStudiesPage: React.FC = () => {
                   </div>
                   
                   {study.demoAvailable && (
-                    <button className="w-full bg-slate-700 hover:bg-orange-500 text-white py-2 px-4 rounded-lg transition-all duration-200 text-sm font-semibold">
-                      Test Solution Demo
+                    <button className="w-full bg-slate-700 hover:bg-slate-600 text-white py-2 px-4 rounded-lg transition-all duration-200 text-sm font-semibold cursor-not-allowed">
+                      Test Demo Unavailable
                     </button>
                   )}
                 </div>
