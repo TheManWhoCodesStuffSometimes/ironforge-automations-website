@@ -309,10 +309,10 @@ const ChatWidget: React.FC = () => {
       {/* Chat Button */}
       <button
         onClick={handleOpen}
-        className={`w-15 h-15 rounded-full bg-orange-500 hover:bg-orange-600 text-white p-3 shadow-lg transition-all duration-300 border-2 border-orange-600 hover:scale-105 ${isOpen ? 'hidden' : 'flex'} items-center justify-center`}
+        className={`w-16 h-16 rounded-full bg-orange-500 hover:bg-orange-600 text-white p-4 shadow-lg transition-all duration-300 border-2 border-orange-600 hover:scale-105 ${isOpen ? 'hidden' : 'flex'} items-center justify-center`}
         aria-label="Open chat"
       >
-        <MessageCircle size={30} />
+        <MessageCircle size={32} />
       </button>
 
       {/* Backdrop for mobile - click to close */}
