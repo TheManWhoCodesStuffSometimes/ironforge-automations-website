@@ -279,7 +279,7 @@ const ChatWidget: React.FC = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed inset-x-0 bottom-0 md:absolute md:bottom-0 md:right-0 md:inset-x-auto w-full md:w-96 h-[calc(100vh-env(safe-area-inset-top))] md:h-[600px] bg-slate-800 rounded-t-2xl md:rounded-xl shadow-2xl flex flex-col border-2 border-orange-500 z-50">
+        <div className="fixed top-16 left-0 right-0 bottom-0 md:absolute md:top-auto md:bottom-0 md:right-0 md:left-auto w-full md:w-96 md:h-[600px] bg-slate-800 rounded-t-2xl md:rounded-xl shadow-2xl flex flex-col border-2 border-orange-500 z-50">
           {/* Header - Enhanced touch target on mobile */}
           <div className="bg-slate-900 border-b-2 border-orange-500 p-4 flex justify-between items-center flex-shrink-0">
             <h3 className="text-orange-400 font-bold text-lg tracking-wide">Chat with IronForge AI</h3>
