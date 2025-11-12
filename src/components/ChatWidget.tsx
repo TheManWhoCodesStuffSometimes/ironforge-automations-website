@@ -46,6 +46,18 @@ const ChatWidget: React.FC = () => {
     scrollToBottom();
   }, [messages]);
 
+  // Prevent body scroll when chat is open on mobile
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   // Dynamic textarea resizing with border radius adjustment
   const adjustTextareaHeight = () => {
     const textarea = inputRef.current;
@@ -115,6 +127,13 @@ const ChatWidget: React.FC = () => {
 
   const handleClose = () => {
     setIsOpen(false);
+  };
+
+  // Handle backdrop click to close on mobile
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
   };
 
   const handleSuggestionClick = (suggestion: string) => {
@@ -249,23 +268,32 @@ const ChatWidget: React.FC = () => {
         <MessageCircle size={30} />
       </button>
 
+      {/* Backdrop for mobile - click to close */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 md:hidden z-40 backdrop-blur-sm"
+          onClick={handleBackdropClick}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed md:absolute bottom-20 md:bottom-0 right-0 md:right-0 w-full h-full md:w-96 md:h-[600px] bg-slate-800 rounded-none md:rounded-xl shadow-2xl flex flex-col border-2 border-orange-500 z-50">
-          {/* Header */}
-          <div className="bg-slate-900 border-b-2 border-orange-500 p-4 flex justify-between items-center">
+        <div className="fixed inset-x-0 bottom-0 md:absolute md:bottom-0 md:right-0 md:inset-x-auto w-full md:w-96 h-[calc(100vh-env(safe-area-inset-top))] md:h-[600px] bg-slate-800 rounded-t-2xl md:rounded-xl shadow-2xl flex flex-col border-2 border-orange-500 z-50">
+          {/* Header - Enhanced touch target on mobile */}
+          <div className="bg-slate-900 border-b-2 border-orange-500 p-4 flex justify-between items-center flex-shrink-0">
             <h3 className="text-orange-400 font-bold text-lg tracking-wide">Chat with IronForge AI</h3>
             <button
               onClick={handleClose}
-              className="text-orange-400 hover:text-white transition-colors text-2xl leading-none"
+              className="text-orange-400 hover:text-white transition-colors text-2xl leading-none p-2 -m-2 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg hover:bg-slate-800/50 active:bg-slate-700/50"
               aria-label="Close chat"
             >
-              <X size={24} />
+              <X size={28} />
             </button>
           </div>
 
-          {/* Messages */}
-          <div className="flex-1 p-5 overflow-y-auto bg-slate-800 space-y-4">
+          {/* Messages - Improved scroll behavior */}
+          <div className="flex-1 p-5 overflow-y-auto bg-slate-800 space-y-4 overscroll-contain">
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -301,12 +329,12 @@ const ChatWidget: React.FC = () => {
 
           {/* Suggestions */}
           {showSuggestions && (
-            <div className="px-5 pb-3 space-y-2">
+            <div className="px-5 pb-3 space-y-2 flex-shrink-0">
               {suggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => handleSuggestionClick(suggestion)}
-                  className="w-full text-left bg-blue-600 hover:bg-slate-900 hover:border-orange-500 border border-blue-600 text-white p-3 rounded-lg text-sm transition-all duration-200 shadow-sm"
+                  className="w-full text-left bg-blue-600 hover:bg-slate-900 hover:border-orange-500 border border-blue-600 text-white p-3 rounded-lg text-sm transition-all duration-200 shadow-sm active:scale-[0.98]"
                 >
                   {suggestion}
                 </button>
@@ -314,8 +342,8 @@ const ChatWidget: React.FC = () => {
             </div>
           )}
 
-          {/* Input */}
-          <div className="bg-slate-900 border-t-2 border-orange-500 p-4 flex items-end space-x-3">
+          {/* Input - Enhanced for mobile keyboard */}
+          <div className="bg-slate-900 border-t-2 border-orange-500 p-4 flex items-end space-x-3 flex-shrink-0 safe-bottom">
             <textarea
               ref={inputRef}
               value={inputValue}
@@ -334,7 +362,7 @@ const ChatWidget: React.FC = () => {
             <button
               onClick={sendMessage}
               disabled={!inputValue.trim() || isLoading}
-              className="bg-orange-500 hover:bg-orange-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white p-3 rounded-full transition-all duration-200 flex-shrink-0"
+              className="bg-orange-500 hover:bg-orange-600 active:bg-orange-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white p-3 rounded-full transition-all duration-200 flex-shrink-0 min-w-[48px] min-h-[48px] flex items-center justify-center active:scale-95"
               aria-label="Send message"
             >
               <Send size={20} />
