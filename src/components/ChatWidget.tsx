@@ -136,13 +136,60 @@ const ChatWidget: React.FC = () => {
     }
   };
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setInputValue(suggestion);
-    inputRef.current?.focus();
-    // Adjust height after setting the suggestion
-    setTimeout(() => {
-      adjustTextareaHeight();
-    }, 0);
+  const handleSuggestionClick = async (suggestion: string) => {
+    // Create the user message
+    const userMessage: Message = { role: 'user', content: suggestion };
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+
+    try {
+      const conversationHistory = getConversationHistory();
+      
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          query: userMessage.content,
+          message: userMessage.content,
+          sender: "user",
+          type: "message",
+          timestamp: new Date().toISOString(),
+          conversationHistory: conversationHistory
+        }),
+      });
+
+      const data = await response.json();
+      console.log('Response data:', data);
+      
+      let botResponse = '';
+      
+      if (Array.isArray(data) && data.length > 0 && data[0].text) {
+        botResponse = data[0].text;
+      } else if (data?.aiResponse) {
+        botResponse = data.aiResponse;
+      } else if (data?.response) {
+        botResponse = data.response;
+      } else if (data?.text) {
+        botResponse = data.text;
+      } else {
+        console.error('Unexpected response format:', data);
+        botResponse = "I've received your message but I'm having trouble processing it. Please try again.";
+      }
+
+      setMessages(prev => [...prev, { role: 'assistant', content: botResponse }]);
+    } catch (error) {
+      console.error('Error:', error);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: "Sorry, I'm having trouble connecting. Please try again later." 
+      }]);
+    } finally {
+      setIsLoading(false);
+      setCurrentLoadingMessage('');
+    }
   };
 
   const getConversationHistory = (): Message[] => {
