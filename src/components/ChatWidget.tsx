@@ -397,13 +397,14 @@ const ChatWidget: React.FC = () => {
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
               placeholder="Type your message..."
-              className="flex-1 bg-slate-700 border border-slate-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 text-white px-4 py-3 text-sm resize-none transition-all duration-200 ease-in-out"
+              className="flex-1 bg-slate-700 border border-slate-600 focus:border-orange-500 focus:ring-2 focus:ring-orange-500/30 text-white px-4 py-3 text-base resize-none transition-all duration-200 ease-in-out"
               rows={1}
               style={{
                 minHeight: '48px',
                 maxHeight: '120px',
                 lineHeight: '1.4',
-                borderRadius: '22px' // Initial rounding, will be dynamically adjusted
+                borderRadius: '22px', // Initial rounding, will be dynamically adjusted
+                fontSize: '16px' // Prevents auto-zoom on iOS
               }}
             />
             <button
