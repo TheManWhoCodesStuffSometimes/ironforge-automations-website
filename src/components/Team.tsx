@@ -20,7 +20,7 @@ When not developing automation solutions, you'll find Thayne exploring Wyoming's
     name: 'Jesse McCormick',
     role: 'COO & Automation Specialist',
     image: '/team-member-1.png',
-    bio: `A Casper, Wyoming native, Jesse McCormick brings a powerful combination of academic diligence and a passion for strategic thinking. After graduating from Kelly Walsh High School, he earned his Associate's in Business Administration from Casper College before advancing to the University of Wyoming. There, he achieved a Bachelor's degree in Economics with a minor in Entrepreneurship—completing his entire college education in three years. This accelerated path highlights his drive and sharp focus.
+    bio: `A Casper, Wyoming native, Jesse McCormick brings a powerful combination of academic diligence and a passion for strategic thinking. After graduating from Kelly Walsh High School, he earned his Associate's in Business Administration from Casper College before advancing to the University of Wyoming. There, he achieved a Bachelor's degree in Economics with a minor in Entrepreneurship, completing his entire college education in three years. This accelerated path highlights his drive and sharp focus.
 
 Jesse’s economic and entrepreneurial background gives him a unique lens for analyzing business challenges.
 

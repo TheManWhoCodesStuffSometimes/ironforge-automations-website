@@ -9,7 +9,7 @@ const services: Service[] = [
   {
     icon: FileText,
     title: 'Document Digitization & Data Extraction',
-    description: 'Turn paper-based processes into digital workflows. AI-powered handwriting recognition converts forms, notes, and records into searchable data that populates your spreadsheets and databases automatically—no manual data entry required.',
+    description: 'Turn paper-based processes into digital workflows. AI-powered handwriting recognition converts forms, notes, and records into searchable data that populates your spreadsheets and databases automatically. No manual data entry required.',
   },
   {
     icon: MessageSquare,
