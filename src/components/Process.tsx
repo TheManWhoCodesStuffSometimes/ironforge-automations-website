@@ -5,10 +5,10 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SectionHeader from './SectionHeader';
 
 const steps: ProcessStep[] = [
-  { step: 1, title: 'Discovery & Analysis', description: 'We start by understanding your business, identifying bottlenecks, and mapping out processes ripe for automation.' },
-  { step: 2, title: 'Solution Design', description: 'Our experts design a custom automation strategy, selecting the right tools and technologies for a seamless fit.' },
-  { step: 3, title: 'Development & Integration', description: 'We build and configure your automation solution, rigorously testing it to ensure reliability and performance.' },
-  { step: 4, title: 'Deployment & Support', description: 'We deploy the solution into your live environment and provide ongoing support and optimization to maximize your ROI.' },
+  { step: 1, title: 'Discovery & Consultation', description: 'We meet, map your current workflows, identify what to automate, and define what success looks like. Usually 1-2 meetings.' },
+  { step: 2, title: 'Rapid Prototyping', description: 'You get a working prototype in 1-2 weeks—not slides or wireframes. We validate the solution actually solves your problem before building it out.' },
+  { step: 3, title: 'Development & Refinement', description: 'Full build based on prototype feedback. You stay involved throughout, not just at the end. Rigorous testing before anything goes live. Typically 4-8 weeks.' },
+  { step: 4, title: 'Training & Ongoing Support', description: 'Comprehensive training so your team actually uses the system. Ongoing support available. Full documentation—you're never locked in.' },
 ];
 
 const Process: React.FC = () => {
@@ -18,8 +18,8 @@ const Process: React.FC = () => {
     <section id="process" className="py-20 bg-slate-800">
       <div className="container mx-auto px-6">
         <SectionHeader
-          title="Our Proven Process"
-          subtitle="A clear, collaborative, and effective path to your automation success."
+          title="How We Work"
+          subtitle="Fast prototypes, real collaboration, no disappearing acts."
         />
         <div ref={containerRef} className="relative">
           <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 -translate-y-1/2">
