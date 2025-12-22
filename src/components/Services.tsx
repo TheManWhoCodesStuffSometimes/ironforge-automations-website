@@ -1,25 +1,25 @@
 // src/components/Services.tsx
 import React from 'react';
-import { Cpu, Code, Zap } from 'react-feather';
+import { FileText, MessageSquare, TrendingUp } from 'react-feather';
 import type { Service } from '../types';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import SectionHeader from './SectionHeader';
 
 const services: Service[] = [
   {
-    icon: Code,
-    title: 'Custom Automation Solutions',
-    description: 'We design and build bespoke automation scripts and software tailored to your unique business challenges, eliminating repetitive tasks and freeing up your team for more valuable work.',
+    icon: FileText,
+    title: 'Document Digitization & Data Extraction',
+    description: 'Turn paper-based processes into digital workflows. AI-powered handwriting recognition converts forms, notes, and records into searchable data that populates your spreadsheets and databases automatically—no manual data entry required.',
   },
   {
-    icon: Cpu,
-    title: 'Robotic Process Automation (RPA)',
-    description: 'Our experts implement intelligent RPA bots to handle complex workflows, data entry, and system interactions, ensuring high accuracy and 24/7 productivity.',
+    icon: MessageSquare,
+    title: 'Custom AI Chatbots & Knowledge Assistants',
+    description: 'Chatbots trained on your actual business documentation. Your customers get instant answers about your products and services. Your employees get a searchable knowledge base that actually understands your operations.',
   },
   {
-    icon: Zap,
-    title: 'AI & System Integration',
-    description: 'We leverage the power of AI and machine learning to create smarter automations and seamlessly integrate disparate systems, creating a unified and efficient operational flow.',
+    icon: TrendingUp,
+    title: 'Business Process & Sales Automation',
+    description: 'Automated reporting, CRM integrations, and sales pipeline workflows that run without babysitting. Daily reports generate themselves, leads get nurtured automatically, and you get dashboards that show what matters.',
   },
 ];
 
@@ -30,8 +30,8 @@ const Services: React.FC = () => {
     <section id="services" className="py-20 bg-slate-900">
       <div className="container mx-auto px-6">
         <SectionHeader
-          title="What We Offer"
-          subtitle="From simple task automation to complex AI-driven workflows, we provide solutions that deliver results."
+          title="What We Do"
+          subtitle="Practical automation that solves real problems. No buzzwords, just results."
         />
         <div
           ref={containerRef}
