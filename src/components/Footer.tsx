@@ -1,5 +1,6 @@
 // src/components/Footer.tsx
 import React from 'react';
+import { MapPin } from 'react-feather';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -22,6 +23,10 @@ const Footer: React.FC = () => {
             </a>
             <p className="text-slate-400 mt-3 max-w-md">
               Custom automation, RPA, and AI integrations that streamline operations and grow your business.
+            </p>
+            <p className="text-slate-500 mt-3 text-sm flex items-center justify-center md:justify-start gap-1.5">
+              <MapPin size={14} className="text-orange-400" />
+              Based at Impact 307, University of Wyoming · Laramie, WY
             </p>
           </div>
 
