@@ -3,32 +3,20 @@ import React, { useState } from 'react';
 import type { TeamMember } from '../types';
 import SectionHeader from './SectionHeader';
 
-const teamMembers: TeamMember[] = [
-  {
-    name: 'Thayne Thatcher',
-    role: 'Founder & AI Specialist',
-    image: '/team-member-2.png',
-    bio: `Thayne Thatcher is a Wyoming native who combines entrepreneurial expertise with cutting-edge AI innovation. Born and raised in Laramie, he helps traditional businesses unlock efficiency through practical automation solutions.
+const founder: TeamMember = {
+  name: 'Thayne Thatcher',
+  role: 'Founder & AI Specialist',
+  image: '/team-member-2.png',
+  bio: `Wyoming native combining entrepreneurial expertise with hands-on AI development. Born and raised in Laramie, now helping traditional businesses unlock efficiency through practical automation.
 
-Thayne holds a Bachelor's degree in Marketing and Entrepreneurship and a Venture MBA from the University of Wyoming, where he was part of only the second cohort ever admitted to this entrepreneurial-focused program. This unique educational foundation, paired with his technical expertise in Python programming and AI development, gives him an uncommon ability to bridge complex technology with real business needs.
+Bachelor's in Marketing and Entrepreneurship plus a Venture MBA from the University of Wyoming, where I was part of only the second cohort admitted to this entrepreneurial-focused program. This foundation, paired with technical expertise in Python and AI development, lets me bridge complex technology with real business needs.
 
-His technical journey began before AI became mainstream, building custom automation systems that solve actual problems for manufacturers and service businesses. Whether digitizing workflows, creating intelligent chatbots, or building sales automation systems, Thayne focuses on delivering measurable ROI rather than flashy demonstrations.
+My technical journey began before AI became mainstream, building custom automation systems that solve actual problems for manufacturers and service businesses. Digitizing workflows, creating intelligent chatbots, building sales automation. The focus is always on measurable ROI, not flashy demos.
 
-When not developing automation solutions, you'll find Thayne exploring Wyoming's outdoors through golf, fly fishing, and E-biking adventures.`
-  },
-  {
-    name: 'Jesse McCormick',
-    role: 'COO & Automation Specialist',
-    image: '/team-member-1.png',
-    bio: `A Casper, Wyoming native, Jesse McCormick brings a powerful combination of academic diligence and a passion for strategic thinking. After graduating from Kelly Walsh High School, he earned his Associate's in Business Administration from Casper College before advancing to the University of Wyoming. There, he achieved a Bachelor's degree in Economics with a minor in Entrepreneurship, completing his entire college education in three years. This accelerated path highlights his drive and sharp focus.
+When not building automation solutions, you'll find me exploring Wyoming's outdoors through golf, fly fishing, and E-biking.`
+};
 
-Jesse’s economic and entrepreneurial background gives him a unique lens for analyzing business challenges.
-
-Outside of his professional interests, Jesse leads an active life. He enjoys the thrill of dirt biking, the strategy of tennis, and the discipline of Brazilian Jiu-Jitsu. He treasures his time with his girlfriend and their pug, Bean.`
-  }
-];
-
-const TeamMemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
+const FounderCard: React.FC<{ member: TeamMember }> = ({ member }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
@@ -37,7 +25,7 @@ const TeamMemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
 
   return (
     <div
-      className="group h-[400px] w-full max-w-sm [perspective:1000px] cursor-pointer"
+      className="group h-[450px] w-full max-w-md [perspective:1000px] cursor-pointer"
       onClick={handleFlip}
     >
       <div
@@ -78,13 +66,11 @@ const Team: React.FC = () => {
     <section id="team" className="py-20 bg-slate-900">
       <div className="container mx-auto px-6">
         <SectionHeader
-          title="Meet Our Team"
-          subtitle="The minds behind the magic. We're a team of passionate builders and problem solvers."
+          title="Meet the Founder"
+          subtitle="Direct access, personal accountability, and real investment in your success."
         />
-        <div className="flex flex-col md:flex-row justify-center items-start gap-12">
-          {teamMembers.map((member) => (
-            <TeamMemberCard key={member.name} member={member} />
-          ))}
+        <div className="flex justify-center">
+          <FounderCard member={founder} />
         </div>
       </div>
     </section>
