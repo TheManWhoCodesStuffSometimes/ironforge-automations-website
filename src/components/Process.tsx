@@ -8,7 +8,7 @@ const steps: ProcessStep[] = [
   { step: 1, title: 'Discovery & Consultation', description: 'We meet, map your current workflows, identify what to automate, and define what success looks like. Usually 1-2 meetings.' },
   { step: 2, title: 'Rapid Prototyping', description: 'You get a working prototype in 1-2 weeks—not slides or wireframes. We validate the solution actually solves your problem before building it out.' },
   { step: 3, title: 'Development & Refinement', description: 'Full build based on prototype feedback. You stay involved throughout, not just at the end. Rigorous testing before anything goes live. Typically 4-8 weeks.' },
-  { step: 4, title: 'Training & Ongoing Support', description: 'Comprehensive training so your team actually uses the system. Ongoing support available. Full documentation—you're never locked in.' },
+  { step: 4, title: 'Training & Ongoing Support', description: 'Comprehensive training so your team actually uses the system. Ongoing support available. Full documentation—no vendor lock-in.' },
 ];
 
 const Process: React.FC = () => {
