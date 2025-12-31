@@ -3,6 +3,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CaseStudiesPage from './pages/CaseStudiesPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import ServiceAgreementPage from './pages/ServiceAgreementPage';
 import ChatWidget from './components/ChatWidget';
 
 function App() {
@@ -11,6 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/case-studies" element={<CaseStudiesPage />} />
+        <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+        <Route path="/service-agreement" element={<ServiceAgreementPage />} />
       </Routes>
       <ChatWidget />
     </div>

@@ -1,5 +1,6 @@
 // src/components/Footer.tsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
@@ -40,10 +41,14 @@ const Footer: React.FC = () => {
 
         <div className="mt-8 pt-6 border-t border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 text-sm">© {year} Ironforge Automations. All rights reserved.</p>
-          <div className="text-slate-500 text-sm">
+          <div className="text-slate-500 text-sm flex flex-wrap justify-center gap-x-2">
             <a href="#contact" className="hover:text-orange-400">Contact</a>
-            <span className="mx-2">•</span>
+            <span>•</span>
             <a href="#services" className="hover:text-orange-400">Get a quote</a>
+            <span>•</span>
+            <Link to="/terms-of-service" className="hover:text-orange-400">Terms & Conditions</Link>
+            <span>•</span>
+            <Link to="/service-agreement" className="hover:text-orange-400">Service Agreement</Link>
           </div>
         </div>
       </div>
